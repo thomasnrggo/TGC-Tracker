@@ -8,7 +8,7 @@ export default function usePokemonService() {
   const searchCards = async (query) => {
     try {
       const cards = await search(query);
-      console.log("cards", cards);
+      console.log("searchCards", cards);
       searchResults.value = cards?.data;
     } catch (error) {
       console.error(error);

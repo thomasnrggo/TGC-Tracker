@@ -10,7 +10,10 @@
       </h1>
       <!-- Add your search bar and card list placeholder here -->
       <div>
-        <div class="grid grid-cols-5 gap-8 w-full mb-8">
+        <form
+          class="grid grid-cols-5 gap-8 w-full mb-8"
+          @submit.prevent="search"
+        >
           <input
             type="text"
             v-model="state.query"
@@ -20,9 +23,11 @@
           <button @click="search" class="col-span-1 bg-primary-100 p-4">
             Search
           </button>
-        </div>
+        </form>
 
-        <div class="grid grid-cols-5 gap-8">
+        <div v-show="loading" class="text-[white]"><h2>Loading</h2></div>
+
+        <div v-show="!loading" class="grid grid-cols-5 gap-8">
           <img
             v-for="card in searchResults"
             :key="card.id"
@@ -37,17 +42,26 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import usePokemonService from "@/services/usePokemonService";
 
 const { searchResults, searchCards } = usePokemonService();
 
+const loading = ref(true);
 const state = reactive({
   query: "",
 });
 
-const search = () => {
+onMounted(() => {
   searchCards(state.query);
-  console.log("searchResults", searchResults.value);
+  loading.value = false;
+});
+
+const search = () => {
+  loading.value = true;
+  searchCards(state.query);
+  setTimeout(() => {
+    loading.value = false;
+  }, 1000);
 };
 </script>
