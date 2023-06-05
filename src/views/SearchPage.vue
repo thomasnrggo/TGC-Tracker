@@ -1,12 +1,53 @@
 <template>
-  <div class="bg-gray-100 min-h-screen py-8">
+  <div class="bg-secondary-200 min-h-screen py-8">
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </nav>
-    <div class="max-w-3xl mx-auto">
-      <h1 class="text-3xl font-semibold mb-4">Pokemon TCG Tracker</h1>
+    <div class="container mx-auto">
+      <h1 class="text-3xl font-semibold mb-4 text-white">
+        Pokemon TCG Tracker
+      </h1>
       <!-- Add your search bar and card list placeholder here -->
+      <div>
+        <div class="grid grid-cols-5 gap-8 w-full mb-8">
+          <input
+            type="text"
+            v-model="state.query"
+            placeholder="Search for cards"
+            class="col-span-4 w-full p-4"
+          />
+          <button @click="search" class="col-span-1 bg-primary-100 p-4">
+            Search
+          </button>
+        </div>
+
+        <div class="grid grid-cols-5 gap-8">
+          <img
+            v-for="card in searchResults"
+            :key="card.id"
+            :src="card?.images?.small"
+            :alt="card.name"
+            class="col-span-1 w-full"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { reactive } from "vue";
+import usePokemonService from "@/services/usePokemonService";
+
+const { searchResults, searchCards } = usePokemonService();
+
+const state = reactive({
+  query: "",
+});
+
+const search = () => {
+  searchCards(state.query);
+  console.log("searchResults", searchResults.value);
+};
+</script>
