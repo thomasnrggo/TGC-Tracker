@@ -12,6 +12,7 @@ module.exports = {
         200: "#212D40",
         300: "#11151C",
       },
+      white: "#FFFFFF",
     },
     extend: {},
   },

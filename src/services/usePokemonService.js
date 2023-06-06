@@ -1,22 +1,35 @@
 /* eslint-disable no-unused-vars */
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { searchCards as search } from "./pokemonTGC";
 
 export default function usePokemonService() {
-  const searchResults = ref([]);
+  const searchResults = reactive({
+    data: [],
+    page: 1,
+    pageSize: 24,
+    totalCount: 0,
+  });
+  const loading = ref(false);
 
-  const searchCards = async (query) => {
+  const searchCards = async (query, pageSize, page) => {
+    loading.value = true;
     try {
-      const cards = await search(query);
-      console.log("searchCards", cards);
-      searchResults.value = cards?.data;
+      const results = await search(query, pageSize, page);
+      searchResults.data = results.data;
+      searchResults.page = results.page;
+      searchResults.totalCount = results.totalCount;
     } catch (error) {
       console.error(error);
+    } finally {
+      setTimeout(() => {
+        loading.value = false;
+      }, 600);
     }
   };
 
   return {
     searchResults,
     searchCards,
+    loading,
   };
 }

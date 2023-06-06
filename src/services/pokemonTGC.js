@@ -7,7 +7,7 @@ const api = axios.create({
   },
 });
 
-export const searchCards = async (query, pageSize = 20, page = 1) => {
+export const searchCards = async (query, pageSize = 24, page = 1) => {
   const response = await api.get("cards", {
     params: {
       ...(query && {
