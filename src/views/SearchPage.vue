@@ -1,17 +1,6 @@
 <template>
-  <div class="bg-secondary-100 min-h-screen">
-    <header class="bg-secondary-200 text-white w-full py-8">
-      <div class="container flex justify-between w-full mx-auto">
-        <h1 class="text-3xl font-semibold mb-4 text-white">
-          Pokemon TCG Tracker
-        </h1>
-        <!-- <nav class="">
-          <router-link to="/">Home</router-link> |
-          <router-link to="/profile">Profile</router-link>
-        </nav> -->
-      </div>
-    </header>
-    <div class="container mx-auto mt-8">
+  <Layout>
+    <div class="container mx-auto pt-8">
       <!-- Add your search bar and card list placeholder here -->
       <div>
         <form
@@ -49,13 +38,13 @@
               :key="card.id"
               class="w-full hover:scale-[1.01] transition-all ease-in cursor-pointer"
             >
-              <!-- <router-link :to="`/card/${card.id}`"> -->
-              <img
-                class="col-span-1 w-full"
-                :src="card?.images?.small"
-                :alt="card.name"
-              />
-              <!-- </router-link> -->
+              <router-link :to="`/card/${card.id}`">
+                <img
+                  class="col-span-1 w-full"
+                  :src="card?.images?.small"
+                  :alt="card.name"
+                />
+              </router-link>
             </div>
           </div>
           <div class="flex justify-center py-8">
@@ -74,13 +63,14 @@
         </div>
       </div>
     </div>
-  </div>
+  </Layout>
 </template>
 
 <script setup>
 import { reactive, onMounted } from "vue";
 import usePokemonService from "@/services/usePokemonService";
 import Loading from "@/components/LoaderComponent.vue";
+import Layout from "@/components/LayoutView.vue";
 
 const { searchResults, searchCards, loading } = usePokemonService();
 

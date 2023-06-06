@@ -19,3 +19,8 @@ export const searchCards = async (query, pageSize = 24, page = 1) => {
   });
   return response?.data;
 };
+
+export const getCard = async (id) => {
+  const response = await api.get(`cards/${id}`);
+  return response?.data;
+};

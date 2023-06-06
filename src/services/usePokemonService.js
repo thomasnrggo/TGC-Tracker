@@ -21,9 +21,7 @@ export default function usePokemonService() {
     } catch (error) {
       console.error(error);
     } finally {
-      setTimeout(() => {
-        loading.value = false;
-      }, 600);
+      loading.value = false;
     }
   };
 
