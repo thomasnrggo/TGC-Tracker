@@ -34,7 +34,7 @@
             {{ favorite ? "Remove from favorites" : "Add to favorites" }}
           </button>
           <button class="block p-2 bg-primary-100 mb-2" @click="save('owned')">
-            {{ owned ? "I got this" : "I want this" }}
+            {{ owned ? "Remove from collection" : "Add to collection" }}
           </button>
           <button class="block p-2 bg-primary-100 mb-2" @click="save('wanted')">
             {{ wanted ? "Remove to wish list" : "Add to wish list" }}

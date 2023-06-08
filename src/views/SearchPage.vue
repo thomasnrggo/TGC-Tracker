@@ -24,41 +24,44 @@
         <!-- TODO: make reusable loading -->
         <div
           v-if="loading"
-          class="text-white font-semibold flex flex-col items-center justify-center"
+          class="text-white font-semibold flex flex-col items-center justify-center mt-40"
         >
           <Loading />
-          <h2>Loading cards...</h2>
+          <h2>Getting cards...</h2>
         </div>
 
         <div v-else>
-          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-            <!-- TODO: make reusable card -->
-            <div
-              v-for="card in searchResults?.data"
-              :key="card.id"
-              class="w-full hover:scale-[1.01] transition-all ease-in cursor-pointer"
-            >
-              <router-link :to="`/card/${card.id}`">
-                <img
-                  class="col-span-1 w-full"
-                  :src="card?.images?.small"
-                  :alt="card.name"
-                />
-              </router-link>
+          <EmptyState v-if="data?.data.length <= 0"></EmptyState>
+          <div v-else>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+              <!-- TODO: make reusable card -->
+              <div
+                v-for="card in data?.data"
+                :key="card.id"
+                class="w-full hover:scale-[1.01] transition-all ease-in cursor-pointer"
+              >
+                <router-link :to="`/card/${card.id}`">
+                  <img
+                    class="col-span-1 w-full"
+                    :src="card?.images?.small"
+                    :alt="card.name"
+                  />
+                </router-link>
+              </div>
             </div>
-          </div>
-          <div class="flex justify-center py-8">
-            <vue-awesome-paginate
-              :total-items="searchResults.totalCount"
-              :items-per-page="searchResults.pageSize"
-              :max-pages-shown="5"
-              v-model="searchResults.page"
-              :on-click="handlePagination"
-              paginate-buttons-class="w-10 h-10 bg-secondary-200 hover:bg-primary-100 cursor-pointer text-white text-xs font-semibold transition ease rounded-xl"
-              active-page-class="!bg-primary-100"
-              back-button-class="!bg-secondary-300 hover:!bg-primary-200"
-              next-button-class="!bg-secondary-300 hover:!bg-primary-200"
-            />
+            <div class="flex justify-center py-8">
+              <vue-awesome-paginate
+                :total-items="data.totalCount"
+                :items-per-page="data.pageSize"
+                :max-pages-shown="5"
+                v-model="data.page"
+                :on-click="handlePagination"
+                paginate-buttons-class="w-10 h-10 bg-secondary-200 hover:bg-primary-100 cursor-pointer text-white text-xs font-semibold transition ease rounded-xl"
+                active-page-class="!bg-primary-100"
+                back-button-class="!bg-secondary-300 hover:!bg-primary-200"
+                next-button-class="!bg-secondary-300 hover:!bg-primary-200"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -68,11 +71,12 @@
 
 <script setup>
 import { reactive, onMounted } from "vue";
-import usePokemonService from "@/services/usePokemonService";
 import Loading from "@/components/LoaderComponent.vue";
 import Layout from "@/components/LayoutView.vue";
+import usePokemonCards from "@/services/usePokemonCards";
+import EmptyState from "@/components/EmptyState.vue";
 
-const { searchResults, searchCards, loading } = usePokemonService();
+const { data, get, loading } = usePokemonCards();
 
 const state = reactive({
   query: "",
@@ -80,15 +84,16 @@ const state = reactive({
 });
 
 onMounted(() => {
-  searchCards(state.query);
+  get(state.query);
 });
 
 const search = () => {
-  searchCards(state.query);
+  get(state.query);
 };
 
 const handlePagination = (page) => {
-  searchCards(state.query, state.pageSize, page);
+  get(state.query, state.pageSize, page);
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };
 </script>
 

@@ -7,7 +7,8 @@ const api = axios.create({
   },
 });
 
-export const searchCards = async (query, pageSize = 24, page = 1) => {
+export const getCards = async (query, pageSize = 24, page = 1) => {
+  // TODO: how can make search better
   const response = await api.get("cards", {
     params: {
       ...(query && {

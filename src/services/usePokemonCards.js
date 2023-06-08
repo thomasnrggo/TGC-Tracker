@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { ref, reactive } from "vue";
-import { searchCards as search } from "./pokemonTGC";
+import { getCards } from "./useService";
 
-export default function usePokemonService() {
+export default function usePokemonCards() {
   const searchResults = reactive({
     data: [],
     page: 1,
@@ -14,7 +14,7 @@ export default function usePokemonService() {
   const searchCards = async (query, pageSize, page) => {
     loading.value = true;
     try {
-      const results = await search(query, pageSize, page);
+      const results = await getCards(query, pageSize, page);
       searchResults.data = results.data;
       searchResults.page = results.page;
       searchResults.totalCount = results.totalCount;
@@ -26,8 +26,8 @@ export default function usePokemonService() {
   };
 
   return {
-    searchResults,
-    searchCards,
+    data: searchResults,
+    get: searchCards,
     loading,
   };
 }

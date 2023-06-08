@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { getCard } from "./pokemonTGC";
+import { getCard } from "./useService";
 
 const usePokemonCardDetail = () => {
   const pokemon = ref({});
