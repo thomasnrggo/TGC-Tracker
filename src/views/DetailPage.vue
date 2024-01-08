@@ -31,13 +31,13 @@
             class="block p-2 bg-primary-100 mb-2"
             @click="save('favorite')"
           >
-            {{ favorite ? "Remove from favorites" : "Add to favorites" }}
+            {{ favorite ? 'Remove from favorites' : 'Add to favorites' }}
           </button>
           <button class="block p-2 bg-primary-100 mb-2" @click="save('owned')">
-            {{ owned ? "Remove from collection" : "Add to collection" }}
+            {{ owned ? 'Remove from collection' : 'Add to collection' }}
           </button>
           <button class="block p-2 bg-primary-100 mb-2" @click="save('wanted')">
-            {{ wanted ? "Remove to wish list" : "Add to wish list" }}
+            {{ wanted ? 'Remove to wish list' : 'Add to wish list' }}
           </button>
         </div>
       </div>
@@ -46,56 +46,54 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
-import Layout from "@/components/LayoutView.vue";
-import usePokemonCardDetail from "@/services/usePokemonCardDetail";
-import Loading from "@/components/LoaderComponent.vue";
+import { onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import Layout from '@/components/LayoutView.vue'
+import usePokemonCardDetail from '@/services/usePokemonCardDetail'
+import Loading from '@/components/LoaderComponent.vue'
 
-const route = useRoute();
-const { get, data, loading } = usePokemonCardDetail();
+const route = useRoute()
+const { get, data, loading } = usePokemonCardDetail()
 
-const owned = ref(false);
-const favorite = ref(false);
-const wanted = ref(false);
+const owned = ref(false)
+const favorite = ref(false)
+const wanted = ref(false)
 
 onMounted(() => {
-  get(route.params.id);
-  owned.value = data.value.owned;
-  favorite.value = data.value.favorite;
-  wanted.value = data.value.wanted;
-});
+  get(route.params.id)
+  owned.value = data.value.owned
+  favorite.value = data.value.favorite
+  wanted.value = data.value.wanted
+})
 
 const save = (operation) => {
-  get(route.params.id);
-  const savedCards = JSON.parse(localStorage.getItem("cards") || "[]");
+  get(route.params.id)
+  const savedCards = JSON.parse(localStorage.getItem('cards') || '[]')
 
-  const itemToUpdate = savedCards.findIndex(
-    (card) => card.id === data.value.id
-  );
+  const itemToUpdate = savedCards.findIndex((card) => card.id === data.value.id)
 
-  console.log("operation", operation);
+  console.log('operation', operation)
 
   switch (operation) {
-    case "favorite":
-      savedCards[itemToUpdate].favorite = !data.value.favorite;
-      favorite.value = savedCards[itemToUpdate].favorite;
-      localStorage.setItem("cards", JSON.stringify(savedCards));
-      break;
-    case "owned":
-      savedCards[itemToUpdate].owned = !data.value.owned;
-      owned.value = savedCards[itemToUpdate].owned;
-      localStorage.setItem("cards", JSON.stringify(savedCards));
-      break;
-    case "wanted":
-      savedCards[itemToUpdate].wanted = !data.value.wanted;
-      wanted.value = savedCards[itemToUpdate].wanted;
-      localStorage.setItem("cards", JSON.stringify(savedCards));
-      break;
+    case 'favorite':
+      savedCards[itemToUpdate].favorite = !data.value.favorite
+      favorite.value = savedCards[itemToUpdate].favorite
+      localStorage.setItem('cards', JSON.stringify(savedCards))
+      break
+    case 'owned':
+      savedCards[itemToUpdate].owned = !data.value.owned
+      owned.value = savedCards[itemToUpdate].owned
+      localStorage.setItem('cards', JSON.stringify(savedCards))
+      break
+    case 'wanted':
+      savedCards[itemToUpdate].wanted = !data.value.wanted
+      wanted.value = savedCards[itemToUpdate].wanted
+      localStorage.setItem('cards', JSON.stringify(savedCards))
+      break
     default:
-      break;
+      break
   }
-};
+}
 
-console.log(route.params.id);
+console.log(route.params.id)
 </script>

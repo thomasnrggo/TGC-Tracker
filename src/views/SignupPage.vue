@@ -5,6 +5,6 @@
 </template>
 
 <script setup>
-import Layout from "@/components/LayoutView.vue";
-import SignupForm from "@/components/SignupForm.vue";
+import Layout from '@/components/LayoutView.vue'
+import SignupForm from '@/components/SignupForm.vue'
 </script>

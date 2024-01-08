@@ -8,5 +8,5 @@
 </template>
 
 <script setup>
-import Header from "@/components/HeaderComponent.vue";
+import Header from '@/components/HeaderComponent.vue'
 </script>

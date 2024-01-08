@@ -70,31 +70,31 @@
 </template>
 
 <script setup>
-import { reactive, onMounted } from "vue";
-import Loading from "@/components/LoaderComponent.vue";
-import Layout from "@/components/LayoutView.vue";
-import usePokemonCards from "@/services/usePokemonCards";
-import EmptyState from "@/components/EmptyState.vue";
+import { reactive, onMounted } from 'vue'
+import Loading from '@/components/LoaderComponent.vue'
+import Layout from '@/components/LayoutView.vue'
+import usePokemonCards from '@/services/usePokemonCards'
+import EmptyState from '@/components/EmptyState.vue'
 
-const { data, get, loading } = usePokemonCards();
+const { data, get, loading } = usePokemonCards()
 
 const state = reactive({
-  query: "",
+  query: '',
   pageSize: 24,
-});
+})
 
 onMounted(() => {
-  get(state.query);
-});
+  get(state.query)
+})
 
 const search = () => {
-  get(state.query);
-};
+  get(state.query)
+}
 
 const handlePagination = (page) => {
-  get(state.query, state.pageSize, page);
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
+  get(state.query, state.pageSize, page)
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
 </script>
 
 <style>

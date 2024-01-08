@@ -34,15 +34,15 @@
 export default {
   data() {
     return {
-      email: "",
-      password: "",
-    };
+      email: '',
+      password: '',
+    }
   },
   methods: {
     submitLoginForm() {
       // Handle the login logic here
-      console.log("Login with:", this.email, this.password);
+      console.log('Login with:', this.email, this.password)
     },
   },
-};
+}
 </script>

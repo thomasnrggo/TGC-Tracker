@@ -1,5 +1,5 @@
-import { createStore } from "vuex";
-import axios from "axios";
+import { createStore } from 'vuex'
+import axios from 'axios'
 
 export default createStore({
   state: {
@@ -8,35 +8,35 @@ export default createStore({
   },
   mutations: {
     setUser(state, user) {
-      state.user = user;
+      state.user = user
     },
     setToken(state, token) {
-      state.token = token;
+      state.token = token
     },
   },
   actions: {
     register({ commit }, authData) {
       return axios
-        .post("https://tgc-tracker-api.onrender.com/api/v1/auth/signup", {
+        .post('https://tgc-tracker-api.onrender.com/api/v1/auth/signup', {
           username: authData.username,
           email: authData.email,
           password: authData.password,
         })
         .then((response) => {
-          commit("setUser", response.data.user);
-          commit("setToken", response.data.token);
+          commit('setUser', response.data.user)
+          commit('setToken', response.data.token)
         })
         .catch((error) => {
-          throw error;
-        });
+          throw error
+        })
     },
   },
   getters: {
     isAuthenticated(state) {
-      return !!state.token;
+      return !!state.token
     },
     user(state) {
-      return state.user;
+      return state.user
     },
   },
-});
+})

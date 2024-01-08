@@ -22,14 +22,14 @@
 </template>
 
 <script setup>
-import Layout from "@/components/LayoutView.vue";
-import userUserCards from "@/services/useUserCards";
-import { onMounted } from "vue";
+import Layout from '@/components/LayoutView.vue'
+import userUserCards from '@/services/useUserCards'
+import { onMounted } from 'vue'
 
-const { data, get, loading } = userUserCards();
+const { data, get, loading } = userUserCards()
 
 onMounted(() => {
-  get();
-  console.log("data", data, loading);
-});
+  get()
+  console.log('data', data, loading)
+})
 </script>

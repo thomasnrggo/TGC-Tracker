@@ -13,11 +13,11 @@
 
 <script>
 export default {
-  name: "LoadingComponent",
+  name: 'LoadingComponent',
   props: {
     color: {
       type: String,
-      default: "#C47AC0",
+      default: '#C47AC0',
     },
     scale: {
       type: Number,
@@ -27,12 +27,12 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--color": this.color,
-        "--scale": this.scale,
-      };
+        '--color': this.color,
+        '--scale': this.scale,
+      }
     },
   },
-};
+}
 </script>
 
 <style scoped>

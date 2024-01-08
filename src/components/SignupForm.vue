@@ -73,42 +73,42 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default {
   setup() {
-    const store = useStore();
-    const router = useRouter();
+    const store = useStore()
+    const router = useRouter()
 
-    const username = ref("");
-    const email = ref("");
-    const password = ref("");
+    const username = ref('')
+    const email = ref('')
+    const password = ref('')
 
-    const loading = ref(false);
-    const errorMessage = ref("");
+    const loading = ref(false)
+    const errorMessage = ref('')
 
     const submitSignupForm = async () => {
-      loading.value = true;
-      errorMessage.value = "";
+      loading.value = true
+      errorMessage.value = ''
       try {
         await store
-          .dispatch("register", {
+          .dispatch('register', {
             username: username.value,
             email: email.value,
             password: password.value,
           })
           .then(() => {
-            router.push("/");
-          });
+            router.push('/')
+          })
       } catch (error) {
-        console.log(error.response.data.message);
-        errorMessage.value = error.response.data.message;
+        console.log(error.response.data.message)
+        errorMessage.value = error.response.data.message
       } finally {
-        loading.value = false;
+        loading.value = false
       }
-    };
+    }
 
     return {
       username,
@@ -117,7 +117,7 @@ export default {
       loading,
       errorMessage,
       submitSignupForm,
-    };
+    }
   },
-};
+}
 </script>

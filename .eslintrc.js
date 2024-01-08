@@ -3,16 +3,25 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: [
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "plugin:prettier/recommended",
+  plugins: [
+    'vue',
   ],
+  extends: [
+    'plugin:prettier/recommended',
+    "plugin:vue/base",
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+  ],
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    parser: "@babel/eslint-parser",
+    requireConfigFile: false,
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+       "jsx": true
+    }
   },
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    'vue/no-unused-vars': 'warn',
+    'prettier/prettier': 'error',
   },
 };

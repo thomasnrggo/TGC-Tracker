@@ -10,9 +10,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import Layout from "@/components/LayoutView.vue";
-import LoginForm from "@/components/LoginForm.vue";
+import { ref } from 'vue'
+import Layout from '@/components/LayoutView.vue'
+import LoginForm from '@/components/LoginForm.vue'
 
-const currentView = ref("signup"); // 'signup' or 'login'
+const currentView = ref('signup') // 'signup' or 'login'
 </script>
