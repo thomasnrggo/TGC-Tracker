@@ -1,18 +1,20 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
-import jwtDecode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 
 export default createStore({
   state: {
-    user: null,
-    token: null,
+    user: JSON.parse(sessionStorage.getItem('user')) || null,
+    token: sessionStorage.getItem('token') || null,
   },
   mutations: {
     setUser(state, user) {
       state.user = user
+      sessionStorage.setItem('user', JSON.stringify(user))
     },
     setToken(state, token) {
       state.token = token
+      sessionStorage.setItem('token', token)
     },
   },
   actions: {
@@ -48,11 +50,15 @@ export default createStore({
     logout({ commit }) {
       commit('setUser', null)
       commit('setToken', null)
+      sessionStorage.removeItem('user')
+      sessionStorage.removeItem('token')
     },
     checkTokenExpiration({ state, dispatch }) {
       const token = state.token
+      console.log('checking token expiration', token)
       if (token) {
         const decoded = jwtDecode(token)
+        console.log(decoded)
         if (decoded.exp < Date.now() / 1000) {
           dispatch('logout')
         }
