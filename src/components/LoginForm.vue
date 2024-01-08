@@ -25,6 +25,8 @@
                 placeholder="Type an email address"
                 class="border-2 border-gray-200 p-2 rounded w-full"
                 required
+                :disabled="loading"
+                autocomplete="email"
               />
             </div>
             <div class="mb-4">
@@ -35,9 +37,17 @@
                 placeholder="Type a password"
                 class="border-2 border-gray-200 p-2 rounded w-full"
                 required
+                :disabled="loading"
+                autocomplete="current-password"
               />
             </div>
+
+            <div v-if="loading">
+              <LoaderComponent />
+            </div>
+
             <button
+              v-else
               type="submit"
               :disabled="loading"
               class="w-full bg-primary-100 hover:bg-primary-200 text-white font-bold py-2 px-4 rounded transition duration-200 mt-8"
@@ -66,8 +76,12 @@
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import LoaderComponent from '@/components/LoaderComponent.vue'
 
 export default {
+  components: {
+    LoaderComponent,
+  },
   setup() {
     const store = useStore()
     const router = useRouter()
