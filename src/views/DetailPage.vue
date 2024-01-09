@@ -2,16 +2,16 @@
   <Layout>
     <div
       v-if="loading"
-      class="text-white font-semibold flex flex-col items-center justify-center"
+      class="text-gray-100 font-semibold flex flex-col items-center justify-center"
     >
       <Loading />
       <h2>Loading card details...</h2>
     </div>
 
-    <div v-else class="container mx-auto py-8 text-white">
+    <div v-else class="container mx-auto py-8 text-gray-100">
       <button
         @click="$router.go(-1)"
-        class="text-white text-xs py-4 hover:text-primary-100 translate ease"
+        class="text-gray-100 text-xs py-4 hover:text-primary-100 translate ease"
       >
         Go back
       </button>
@@ -28,15 +28,15 @@
           <span class="text-sm block">by {{ data.artist }}</span>
 
           <button
-            class="block p-2 bg-primary-100 mb-2"
+            class="block p-2 bg-pink-500 mb-2"
             @click="save('favorite')"
           >
             {{ favorite ? 'Remove from favorites' : 'Add to favorites' }}
           </button>
-          <button class="block p-2 bg-primary-100 mb-2" @click="save('owned')">
+          <button class="block p-2 bg-pink-500 mb-2" @click="save('owned')">
             {{ owned ? 'Remove from collection' : 'Add to collection' }}
           </button>
-          <button class="block p-2 bg-primary-100 mb-2" @click="save('wanted')">
+          <button class="block p-2 bg-pink-500 mb-2" @click="save('wanted')">
             {{ wanted ? 'Remove to wish list' : 'Add to wish list' }}
           </button>
         </div>

@@ -60,7 +60,7 @@
               v-else
               type="submit"
               :disabled="loading"
-              class="w-full bg-primary-100 hover:bg-primary-200 text-white font-bold py-2 px-4 rounded transition duration-200 mt-8"
+              class="w-full bg-pink-500 hover:bg-primary-200 text-gray-100 font-bold py-2 px-4 rounded transition duration-200 mt-8"
             >
               Sign Up
             </button>

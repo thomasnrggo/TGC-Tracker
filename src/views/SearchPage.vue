@@ -19,7 +19,7 @@
           />
           <button
             @click="get(state.query)"
-            class="col-span-1 bg-primary-100 hover:bg-primary-200 transition ease rounded-sm text-white p-2 font-semibold"
+            class="col-span-1 bg-pink-500 hover:bg-primary-200 transition ease rounded-sm text-gray-100 p-2 font-semibold"
           >
             Search
           </button>
@@ -28,7 +28,7 @@
         <!-- TODO: make reusable loading -->
         <div
           v-if="loading"
-          class="text-white font-semibold flex flex-col items-center justify-center mt-40"
+          class="text-gray-100 font-semibold flex flex-col items-center justify-center mt-40"
         >
           <Loading />
           <h2>Getting cards...</h2>
@@ -61,8 +61,8 @@
                 :max-pages-shown="5"
                 v-model="data.page"
                 :on-click="handlePagination"
-                paginate-buttons-class="w-10 h-10 bg-secondary-200 hover:bg-primary-100 cursor-pointer text-white text-xs font-semibold transition ease rounded-xl"
-                active-page-class="!bg-primary-100"
+                paginate-buttons-class="w-10 h-10 bg-secondary-200 hover:bg-pink-500 cursor-pointer text-gray-100 text-xs font-semibold transition ease rounded-xl"
+                active-page-class="!bg-pink-500"
                 back-button-class="!bg-secondary-300 hover:!bg-primary-200"
                 next-button-class="!bg-secondary-300 hover:!bg-primary-200"
               />

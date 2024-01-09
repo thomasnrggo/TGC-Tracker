@@ -33,11 +33,105 @@ const useUserCards = () => {
     }
   }
 
+  const addCardToCollection = async (card) => {
+    try {
+      const token = store.state.token
+      const id = store.state.user._id
+
+      await axios
+        .post(`https://tgc-tracker-api.onrender.com/api/v1/cards/${id}`, card, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(async () => {
+          await store.dispatch('updateUserCards')
+        })
+    } catch (err) {
+      console.error(err)
+      error.value = err
+    }
+  }
+
+  const addCardToWishlist = async (card) => {
+    try {
+      const token = store.state.token
+      const id = store.state.user._id
+
+      await axios
+        .post(
+          `https://tgc-tracker-api.onrender.com/api/v1/cards/${id}/wishlist`,
+          card,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+        .then(async () => {
+          await store.dispatch('updateUserCards')
+        })
+    } catch (err) {
+      console.error(err)
+      error.value = err
+    }
+  }
+
+  const removeCardFromCollection = async (card) => {
+    try {
+      const token = store.state.token
+      const id = store.state.user._id
+
+      await axios
+        .delete(
+          `https://tgc-tracker-api.onrender.com/api/v1/cards/${id}/${card.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+        .then(async () => {
+          await store.dispatch('updateUserCards')
+        })
+    } catch (err) {
+      console.error(err)
+      error.value = err
+    }
+  }
+
+  const removeCardFromWishlist = async (card) => {
+    try {
+      const token = store.state.token
+      const id = store.state.user._id
+
+      await axios
+        .delete(
+          `https://tgc-tracker-api.onrender.com/api/v1/cards/${id}/wishlist/${card._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+        .then(async () => {
+          await store.dispatch('updateUserCards')
+        })
+    } catch (err) {
+      console.error(err)
+      error.value = err
+    }
+  }
+
   return {
     data: userCards,
     get: getUserCards,
     loading,
     error,
+    addToCollection: addCardToCollection,
+    removeFromCollection: removeCardFromCollection,
+    addToWishlist: addCardToWishlist,
+    removeFromWishlist: removeCardFromWishlist,
   }
 }
 

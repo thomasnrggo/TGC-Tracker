@@ -6,6 +6,7 @@ export default createStore({
   state: {
     user: JSON.parse(sessionStorage.getItem('user')) || null,
     token: sessionStorage.getItem('token') || null,
+    cards: JSON.parse(sessionStorage.getItem('cards')) || null,
   },
   mutations: {
     setUser(state, user) {
@@ -15,6 +16,10 @@ export default createStore({
     setToken(state, token) {
       state.token = token
       sessionStorage.setItem('token', token)
+    },
+    setCards(state, cards) {
+      state.cards = cards
+      sessionStorage.setItem('cards', JSON.stringify(cards))
     },
   },
   actions: {
@@ -43,6 +48,9 @@ export default createStore({
           commit('setUser', response.data.user)
           commit('setToken', response.data.token)
         })
+        .then(() => {
+          this.dispatch('updateUserCards')
+        })
         .catch((error) => {
           throw error
         })
@@ -55,14 +63,29 @@ export default createStore({
     },
     checkTokenExpiration({ state, dispatch }) {
       const token = state.token
-      console.log('checking token expiration', token)
       if (token) {
         const decoded = jwtDecode(token)
-        console.log(decoded)
         if (decoded.exp < Date.now() / 1000) {
           dispatch('logout')
         }
       }
+    },
+    updateUserCards({ commit }) {
+      const token = this.state.token
+      const id = this.state.user._id
+
+      axios
+        .get(`https://tgc-tracker-api.onrender.com/api/v1/cards/${id}/list`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          commit('setCards', response.data)
+        })
+        .catch((error) => {
+          throw error
+        })
     },
   },
   getters: {

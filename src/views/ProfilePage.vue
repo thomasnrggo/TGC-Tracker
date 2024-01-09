@@ -9,7 +9,7 @@
           <button
             v-if="data.length !== 0"
             @click="triggerSearch"
-            class="bg-primary-100 hover:bg-primary-200 text-white font-bold py-2 px-4 rounded transition duration-200"
+            class="bg-pink-500 hover:bg-primary-200 text-gray-100 font-bold py-2 px-4 rounded transition duration-200"
           >
             Search
           </button>
@@ -50,13 +50,13 @@
           :key="card.id"
           class="w-full hover:scale-[1.01] transition-all ease-in cursor-pointer"
         >
-          <router-link :to="`/card/${card.id}`">
-            <img
-              class="col-span-1 w-full"
-              :src="card?.images?.small"
-              :alt="card.name"
-            />
-          </router-link>
+          <!-- <router-link :to="`/card/${card.id}`"> -->
+          <img
+            class="col-span-1 w-full"
+            :src="card?.images?.small"
+            :alt="card.name"
+          />
+          <!-- </router-link> -->
         </div>
       </div>
     </div>
@@ -80,6 +80,7 @@ export default {
     const { data, get, loading } = userUserCards()
 
     onMounted(async () => {
+      await store.dispatch('checkTokenExpiration')
       await get()
     })
 

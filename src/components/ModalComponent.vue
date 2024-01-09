@@ -8,7 +8,7 @@
     >
       <button
         @click="closeModal"
-        class="absolute top-0 right-0 mx-4 my-2 text-white hover:text-gray-300"
+        class="absolute top-0 right-0 mx-4 my-2 text-gray-100 hover:text-gray-300"
       >
         <span class="text-xl">&times;</span>
       </button>

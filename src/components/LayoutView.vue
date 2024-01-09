@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-secondary-200 text-white w-full py-8">
+  <header class="bg-secondary-200 text-gray-100 w-full py-8">
     <Header></Header>
   </header>
   <div class="bg-secondary-100 min-h-[calc(100vh-100px)]">

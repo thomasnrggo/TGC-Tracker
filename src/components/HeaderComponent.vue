@@ -1,7 +1,7 @@
 <template>
   <div class="container flex justify-between w-full mx-auto">
     <router-link to="/">
-      <h1 class="text-3xl font-semibold text-white m-0">Pokemon TCG Tracker</h1>
+      <h1 class="text-3xl font-semibold text-gray-100 m-0">Pokemon TCG Tracker</h1>
     </router-link>
     <nav class="capitalize">
       <router-link v-if="isAuthenticated && !isProfilePage" to="/profile"

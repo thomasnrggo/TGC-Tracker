@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ref, reactive } from 'vue'
 import { getCards } from './useService'
 
