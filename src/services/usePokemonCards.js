@@ -11,10 +11,14 @@ export default function usePokemonCards() {
   })
   const loading = ref(false)
 
-  const searchCards = async (query, pageSize, page) => {
+  const searchCards = async (
+    query,
+    page,
+    pageSize = searchResults.pageSize,
+  ) => {
     loading.value = true
     try {
-      const results = await getCards(query, pageSize, page)
+      const results = await getCards(query, page, pageSize)
       searchResults.data = results.data
       searchResults.page = results.page
       searchResults.totalCount = results.totalCount

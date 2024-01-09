@@ -9,7 +9,7 @@
       <div>
         <form
           class="grid grid-cols-5 gap-8 w-full mb-8"
-          @submit.prevent="search"
+          @submit.prevent="get(state.query)"
         >
           <input
             type="text"
@@ -18,7 +18,7 @@
             class="col-span-4 w-full p-2 rounded-sm"
           />
           <button
-            @click="search"
+            @click="get(state.query)"
             class="col-span-1 bg-primary-100 hover:bg-primary-200 transition ease rounded-sm text-white p-2 font-semibold"
           >
             Search
@@ -122,6 +122,7 @@ export default {
       showModal,
       selectedCard,
       handleCardClick,
+      get,
     }
   },
 }
