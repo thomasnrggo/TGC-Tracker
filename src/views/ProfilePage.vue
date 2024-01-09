@@ -1,7 +1,49 @@
 <template>
   <Layout>
     <div class="container mx-auto pt-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+      <div class="mb-8">
+        <div class="flex justify-between items-center">
+          <h2 class="text-4xl font-bold text-center text-gray-800 capitalize">
+            {{ username }} Collection
+          </h2>
+          <button
+            v-if="data.length !== 0"
+            @click="triggerSearch"
+            class="bg-primary-100 hover:bg-primary-200 text-white font-bold py-2 px-4 rounded transition duration-200"
+          >
+            Search
+          </button>
+        </div>
+        <div v-if="isSearchActive" class="search-bar mt-8">
+          <input
+            type="text"
+            placeholder="Search cards..."
+            class="w-full p-2 border rounded"
+          />
+        </div>
+      </div>
+
+      <LoaderComponent v-if="loading" />
+
+      <div
+        v-if="!loading && data.length === 0"
+        class="text-center flex flex-col justify-center items-center min-h-[60vh]"
+      >
+        <h3 class="text-3xl text-gray-800 font-semibold mb-4">
+          Your collection is empty
+        </h3>
+        <p class="text-lg text-gray-500 mb-6">
+          Start building your collection by finding and adding cards.
+        </p>
+        <router-link
+          to="/"
+          class="text-gray-500 hover:text-primary-100 font-bold rounded border border-gray-500 hover:border-primary-100 p-2 transition duration-200 inline-block"
+        >
+          Browse Cards
+        </router-link>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
         <!-- TODO: make reusable card -->
         <div
           v-for="card in data"
@@ -21,15 +63,41 @@
   </Layout>
 </template>
 
-<script setup>
+<script>
+import { onMounted, ref } from 'vue'
+import { useStore } from 'vuex'
 import Layout from '@/components/LayoutView.vue'
 import userUserCards from '@/services/useUserCards'
-import { onMounted } from 'vue'
+import LoaderComponent from '@/components/LoaderComponent.vue'
 
-const { data, get, loading } = userUserCards()
+export default {
+  setup() {
+    const store = useStore()
+    const username = store.state.user.username
 
-onMounted(() => {
-  get()
-  console.log('data', data, loading)
-})
+    const isSearchActive = ref(false)
+
+    const { data, get, loading } = userUserCards()
+
+    onMounted(async () => {
+      await get()
+    })
+
+    const triggerSearch = () => {
+      isSearchActive.value = !isSearchActive.value
+    }
+
+    return {
+      data,
+      loading,
+      username,
+      isSearchActive,
+      triggerSearch,
+    }
+  },
+  components: {
+    Layout,
+    LoaderComponent,
+  },
+}
 </script>
