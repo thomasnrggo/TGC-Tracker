@@ -27,10 +27,7 @@
           <h1 class="text-3xl font-semibold">{{ data.name }}</h1>
           <span class="text-sm block">by {{ data.artist }}</span>
 
-          <button
-            class="block p-2 bg-pink-500 mb-2"
-            @click="save('favorite')"
-          >
+          <button class="block p-2 bg-pink-500 mb-2" @click="save('favorite')">
             {{ favorite ? 'Remove from favorites' : 'Add to favorites' }}
           </button>
           <button class="block p-2 bg-pink-500 mb-2" @click="save('owned')">
