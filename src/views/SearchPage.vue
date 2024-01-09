@@ -1,6 +1,5 @@
 <template>
   <Layout>
-    <button @click="showModal = true">Open Modal</button>
     <ModalComponent :show="showModal" @update:show="showModal = $event">
       <CardDetailComponent :card="selectedCard" />
     </ModalComponent>
