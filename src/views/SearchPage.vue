@@ -1,5 +1,10 @@
 <template>
   <Layout>
+    <button @click="showModal = true">Open Modal</button>
+    <ModalComponent :show="showModal" @update:show="showModal = $event">
+      <CardDetailComponent :card="selectedCard" />
+    </ModalComponent>
+
     <div class="container mx-auto pt-8">
       <!-- Add your search bar and card list placeholder here -->
       <div>
@@ -39,14 +44,15 @@
                 v-for="card in data?.data"
                 :key="card.id"
                 class="w-full hover:scale-[1.01] transition-all ease-in cursor-pointer"
+                @click="handleCardClick(card)"
               >
-                <router-link :to="`/card/${card.id}`">
-                  <img
-                    class="col-span-1 w-full"
-                    :src="card?.images?.small"
-                    :alt="card.name"
-                  />
-                </router-link>
+                <!-- <router-link :to="`/card/${card.id}`"> -->
+                <img
+                  class="col-span-1 w-full"
+                  :src="card?.images?.small"
+                  :alt="card.name"
+                />
+                <!-- </router-link> -->
               </div>
             </div>
             <div class="flex justify-center py-8">
@@ -69,31 +75,56 @@
   </Layout>
 </template>
 
-<script setup>
-import { reactive, onMounted } from 'vue'
+<script>
+import { reactive, onMounted, ref } from 'vue'
 import Loading from '@/components/LoaderComponent.vue'
 import Layout from '@/components/LayoutView.vue'
 import usePokemonCards from '@/services/usePokemonCards'
 import EmptyState from '@/components/EmptyState.vue'
+import ModalComponent from '@/components/ModalComponent.vue'
+import CardDetailComponent from '@/components/CardDetailComponent.vue'
 
-const { data, get, loading } = usePokemonCards()
+export default {
+  components: {
+    Loading,
+    Layout,
+    EmptyState,
+    ModalComponent,
+    CardDetailComponent,
+  },
+  setup() {
+    const state = reactive({
+      query: '',
+    })
 
-const state = reactive({
-  query: '',
-  pageSize: 24,
-})
+    const { data, loading, get } = usePokemonCards()
 
-onMounted(() => {
-  get(state.query)
-})
+    const handlePagination = (page) => {
+      get(state.query, page)
+    }
 
-const search = () => {
-  get(state.query)
-}
+    onMounted(() => {
+      get()
+    })
 
-const handlePagination = (page) => {
-  get(state.query, state.pageSize, page)
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+    const showModal = ref(false)
+    const selectedCard = ref(null)
+
+    const handleCardClick = (card) => {
+      selectedCard.value = card
+      showModal.value = true
+    }
+
+    return {
+      state,
+      data,
+      loading,
+      handlePagination,
+      showModal,
+      selectedCard,
+      handleCardClick,
+    }
+  },
 }
 </script>
 

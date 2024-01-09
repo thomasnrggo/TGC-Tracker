@@ -6,7 +6,7 @@ export default function usePokemonCards() {
   const searchResults = reactive({
     data: [],
     page: 1,
-    pageSize: 24,
+    pageSize: 12,
     totalCount: 0,
   })
   const loading = ref(false)
