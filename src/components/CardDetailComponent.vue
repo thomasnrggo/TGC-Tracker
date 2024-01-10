@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gray-800 p-8 rounded-lg shadow-lg flex overflow-hidden max-w-4xl"
+    class="bg-gray-800 rounded-lg shadow-lg flex flex-col lg:flex-row max-w-4xl w-full p-8"
   >
     <!-- Left side with image -->
     <div class="block w-full lg:block lg:w-1/2 relative">
