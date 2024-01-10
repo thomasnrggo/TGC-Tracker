@@ -1,11 +1,18 @@
 <template>
   <div class="container mx-auto py-8 text-gray-800">
     <div
-      class="max-w-md mx-auto bg-white rounded-lg overflow-hidden md:max-w-lg"
+      class="max-w-md mx-auto bg-gray-800 text-gray-300 rounded-lg overflow-hidden md:max-w-lg"
     >
       <div class="md:flex">
         <div class="w-full p-5">
-          <h2 class="text-4xl font-bold text-center">Login</h2>
+          <div class="flex flex-col justify-center items-center">
+            <img
+              class="w-24 h-24 object-contain"
+              src="https://img.pokemondb.net/sprites/scarlet-violet/normal/mewtwo.png"
+              alt="Mewtwo"
+            />
+            <h2 class="text-3xl text-gray-300 font-bold text-center">Login</h2>
+          </div>
 
           <div
             v-if="errorMessage"
@@ -16,26 +23,30 @@
             <span class="block sm:inline">{{ errorMessage }}</span>
           </div>
 
-          <form @submit.prevent="submitLoginForm" class="py-4">
-            <div class="mb-4">
-              <label class="block font-semibold">Email:</label>
+          <form @submit.prevent="submitLoginForm" class="py-8">
+            <div class="mb-8">
+              <label class="block font-semibold text-gray-400 mb-1 text-sm"
+                >Email:</label
+              >
               <input
                 type="email"
                 v-model="email"
                 placeholder="Type an email address"
-                class="border-2 border-gray-200 p-2 rounded w-full"
+                class="border border-gray-700 p-2 rounded w-full bg-gray-500 placeholder:text-gray-700"
                 required
                 :disabled="loading"
                 autocomplete="email"
               />
             </div>
-            <div class="mb-4">
-              <label class="block font-semibold">Password:</label>
+            <div class="mb-8">
+              <label class="block font-semibold text-gray-400 mb-1 text-sm"
+                >Password:</label
+              >
               <input
                 type="password"
                 v-model="password"
                 placeholder="Type a password"
-                class="border-2 border-gray-200 p-2 rounded w-full"
+                class="border border-gray-700 p-2 rounded w-full bg-gray-500 placeholder:text-gray-700"
                 required
                 :disabled="loading"
                 autocomplete="current-password"
@@ -50,7 +61,7 @@
               v-else
               type="submit"
               :disabled="loading"
-              class="w-full bg-pink-500 hover:bg-primary-200 text-gray-100 font-bold py-2 px-4 rounded transition duration-200 mt-8"
+              class="w-full bg-pink-500 hover:bg-pink-600 text-gray-100 font-bold py-2 px-4 rounded transition duration-200 mt-8"
             >
               Login
             </button>
@@ -60,7 +71,7 @@
                 Don't have an account?
                 <router-link
                   to="/signup"
-                  class="text-blue-500 hover:text-blue-700"
+                  class="text-pink-400 hover:text-pink-600"
                   >Sign up</router-link
                 >.
               </p>

@@ -13,7 +13,11 @@
       >
         <span class="text-2xl">&times;</span>
       </button>
-      <slot></slot>
+      <div
+        class="bg-gray-800 rounded-lg shadow-lg flex flex-col lg:flex-row max-w-4xl w-full p-8"
+      >
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>

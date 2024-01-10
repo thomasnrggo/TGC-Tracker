@@ -3,10 +3,11 @@
     <div class="container mx-auto pt-8">
       <div class="mb-8">
         <div class="flex justify-between items-center">
-          <h2 class="text-4xl font-bold text-center text-gray-800 capitalize">
-            {{ username }} Collection
+          <h2 class="text-3xl font-bold text-center text-gray-200 capitalize">
+            My Collection
           </h2>
           <button
+            v-show="false"
             v-if="data.length !== 0"
             @click="triggerSearch"
             class="bg-pink-500 hover:bg-primary-200 text-gray-100 font-bold py-2 px-4 rounded transition duration-200"
@@ -14,6 +15,7 @@
             Search
           </button>
         </div>
+        <hr class="border-gray-500 my-4" />
         <div v-if="isSearchActive" class="search-bar mt-8">
           <input
             type="text"
@@ -50,13 +52,13 @@
           :key="card.id"
           class="w-full hover:scale-[1.01] transition-all ease-in cursor-pointer"
         >
-          <!-- <router-link :to="`/card/${card.id}`"> -->
-          <img
-            class="col-span-1 w-full"
-            :src="card?.images?.small"
-            :alt="card.name"
-          />
-          <!-- </router-link> -->
+          <router-link :to="`/card/${card.id}`">
+            <img
+              class="col-span-1 w-full"
+              :src="card?.images?.small"
+              :alt="card.name"
+            />
+          </router-link>
         </div>
       </div>
     </div>

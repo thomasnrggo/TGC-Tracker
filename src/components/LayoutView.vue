@@ -2,7 +2,7 @@
   <header class="bg-secondary-200 text-gray-100 w-full py-8">
     <Header></Header>
   </header>
-  <div class="bg-secondary-100 min-h-[calc(100vh-100px)]">
+  <div class="bg-secondary-100 min-h-[calc(100vh-100px)] pb-12">
     <slot></slot>
   </div>
 </template>

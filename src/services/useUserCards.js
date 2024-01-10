@@ -34,6 +34,7 @@ const useUserCards = () => {
   }
 
   const addCardToCollection = async (card) => {
+    loading.value = true
     try {
       const token = store.state.token
       const id = store.state.user._id
@@ -46,14 +47,17 @@ const useUserCards = () => {
         })
         .then(async () => {
           await store.dispatch('updateUserCards')
+          loading.value = false
         })
     } catch (err) {
       console.error(err)
       error.value = err
+      loading.value = false
     }
   }
 
   const addCardToWishlist = async (card) => {
+    loading.value = true
     try {
       const token = store.state.token
       const id = store.state.user._id
@@ -70,6 +74,7 @@ const useUserCards = () => {
         )
         .then(async () => {
           await store.dispatch('updateUserCards')
+          loading.value = false
         })
     } catch (err) {
       console.error(err)
@@ -78,6 +83,7 @@ const useUserCards = () => {
   }
 
   const removeCardFromCollection = async (card) => {
+    loading.value = true
     try {
       const token = store.state.token
       const id = store.state.user._id
@@ -93,6 +99,7 @@ const useUserCards = () => {
         )
         .then(async () => {
           await store.dispatch('updateUserCards')
+          loading.value = false
         })
     } catch (err) {
       console.error(err)
@@ -101,6 +108,7 @@ const useUserCards = () => {
   }
 
   const removeCardFromWishlist = async (card) => {
+    loading.value = true
     try {
       const token = store.state.token
       const id = store.state.user._id
@@ -116,6 +124,7 @@ const useUserCards = () => {
         )
         .then(async () => {
           await store.dispatch('updateUserCards')
+          loading.value = false
         })
     } catch (err) {
       console.error(err)

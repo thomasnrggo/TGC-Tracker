@@ -5,12 +5,19 @@
         Pokemon TCG Tracker
       </h1>
     </router-link>
-    <nav class="capitalize">
+    <nav
+      class="capitalize text-gray-400 hover:text-pink-300 transition duration-200"
+    >
       <router-link v-if="isAuthenticated && !isProfilePage" to="/profile"
         >Profile</router-link
       >
-      <button v-if="isAuthenticated && isProfilePage" @click="logout">
-        Logout
+      <button
+        v-if="isAuthenticated && isProfilePage"
+        @click="logout"
+        class="flex items-center"
+      >
+        <span>Logout</span>
+        <font-awesome-icon :icon="['fas', 'right-from-bracket']" class="ml-2" />
       </button>
       <router-link v-if="!isAuthenticated" to="/login">Login</router-link>
     </nav>
