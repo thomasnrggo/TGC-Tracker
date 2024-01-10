@@ -55,7 +55,7 @@
             <img
               :src="card.set.images.logo"
               :alt="`${card.set.name} logo`"
-              class="h-12 w-auto object-contain"
+              class="h-12 w-auto max-w-[50%] object-contain"
             />
           </div>
         </div>
@@ -66,9 +66,12 @@
             <h4 class="text-lg font-semibold mb-2 text-gray-200">
               Card Market Prices
             </h4>
-            <a :href="card.cardmarket.url" target="_blank"
-              >Check Latest Prices</a
-            >
+            <a :href="card.cardmarket.url" target="_blank">
+              <font-awesome-icon
+                :icon="['fas', 'arrow-up-right-from-square']"
+                class="text-gray-500 hover:text-pink-300"
+              />
+            </a>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div class="bg-gray-700 p-3 rounded">

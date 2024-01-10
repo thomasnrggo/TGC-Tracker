@@ -7,7 +7,14 @@ import './assets/styles.css'
 import VueAwesomePaginate from 'vue-awesome-paginate'
 import 'vue-awesome-paginate/dist/style.css'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faArrowUpRightFromSquare)
+
 const app = createApp(App)
+app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(store)
 app.use(router)
 
