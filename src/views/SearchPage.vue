@@ -15,7 +15,7 @@
             type="text"
             v-model="state.query"
             placeholder="Search for cards"
-            class="col-span-4 w-full p-2 rounded-sm"
+            class="col-span-4 w-full p-2 rounded-sm bg-gray-600 text-gray-200"
           />
           <button
             @click="get(state.query)"
@@ -35,7 +35,14 @@
         </div>
 
         <div v-else>
-          <EmptyState v-if="data?.data.length <= 0"></EmptyState>
+          <EmptyState
+            v-if="data?.data.length <= 0"
+            image="https://img.pokemondb.net/sprites/scarlet-violet/normal/psyduck.png"
+            altText="Pyduck"
+            title="Psyduck used Confusion!"
+            message="There's no results for your search, Try doing a different search"
+          />
+
           <div v-else>
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
               <!-- TODO: make reusable card -->
