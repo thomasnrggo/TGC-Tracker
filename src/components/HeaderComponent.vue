@@ -1,9 +1,7 @@
 <template>
-  <div class="container flex justify-between w-full mx-auto">
+  <div class="container flex justify-between items-center w-full mx-auto">
     <router-link to="/">
-      <h1 class="text-3xl font-semibold text-gray-100 m-0">
-        Pokemon TCG Tracker
-      </h1>
+      <img src="@/assets/logo.png" alt="Snorlax" class="w-auto h-32" />
     </router-link>
     <nav
       class="capitalize text-gray-400 hover:text-pink-300 transition duration-200"
