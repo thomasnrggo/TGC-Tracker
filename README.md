@@ -1,7 +1,11 @@
+![Pokemon TCG Tracker App](./src/assets/logo.png)
+
 # Pokemon TCG Tracker
 
 ## Overview
 The Pokemon TCG Tracker is a Vue.js web application designed for enthusiasts of the Pokémon Trading Card Game. It serves as a digital platform for users to build and track their personal Pokemon card collections. Integrating with the [pokemontcg.io](https://pokemontcg.io/) API and a custom API, the app provides an extensive database of Pokémon cards, allowing users to search, view, and manage their favorite cards with ease.
+
+<img width="1793" alt="image" src="https://github.com/thomasnrggo/TGC-Tracker/assets/44792692/001bc1a3-a733-4508-8043-efdb04b15eb2">
 
 ## Features
 - **Card Search**: Utilize a powerful search feature to find cards by name, type, or set.
