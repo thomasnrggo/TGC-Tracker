@@ -1,7 +1,7 @@
 <template>
   <div class="container flex justify-between items-center w-full mx-auto">
     <router-link to="/">
-      <img src="@/assets/logo.png" alt="Snorlax" class="w-auto h-32" />
+      <img src="@/assets/logo.png" alt="Snorlax" class="w-auto h-28" />
     </router-link>
     <nav
       class="capitalize text-gray-400 hover:text-pink-300 transition duration-200"
