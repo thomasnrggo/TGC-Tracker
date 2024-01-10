@@ -1,4 +1,6 @@
-<img width="180" alt="Logo" src="./src/assets/logo.png">
+<p align='center'>
+  <img width="180" alt="Logo" src="./src/assets/logo.png" align="center">
+</p>
 
 # Pokemon TCG Tracker
 
