@@ -3,12 +3,24 @@
     class="bg-gray-800 p-8 rounded-lg shadow-lg flex overflow-hidden max-w-4xl"
   >
     <!-- Left side with image -->
-    <div class="hidden lg:block lg:w-1/2">
+    <div class="block w-full lg:block lg:w-1/2 relative">
       <img
+        v-show="imageLoaded"
         :src="card.images.large"
         :alt="card.name"
-        class="h-full w-full object-cover"
+        class="h-full w-full object-contain"
+        @load="handleImageLoad"
       />
+      <div
+        v-show="!imageLoaded"
+        class="h-full w-full flex justify-center items-center"
+      >
+        <img
+          src="@/assets/placeholder.jpg"
+          alt="Pokemon card"
+          class="h-full w-full object-contain"
+        />
+      </div>
     </div>
 
     <!-- Right side with content -->
@@ -16,48 +28,75 @@
       class="w-full lg:w-1/2 p-4 text-gray-100 flex flex-col justify-between"
     >
       <div>
-        <div class="flex justify-between mb-4">
+        <div class="mb-4">
+          <div class="flex justify-between text-base text-gray-400">
+            <h4>{{ card.supertype }}</h4>
+            <h4>{{ card.subtypes.join(', ') }}</h4>
+          </div>
           <h2 class="text-3xl font-bold">{{ card.name }}</h2>
+          <h3 class="text-gray-400 text-lg">{{ card.rarity }}</h3>
         </div>
 
-        <div class="mb-4">
-          <p class="font-medium">
-            Supertype: <span class="font-normal">{{ card.supertype }}</span>
-          </p>
-          <p class="font-medium" v-if="card.subtypes">
-            Subtype:
-            <span class="font-normal">{{ card.subtypes.join(', ') }}</span>
-          </p>
-          <p class="font-medium">
-            HP: <span class="font-normal">{{ card.hp }}</span>
-          </p>
-          <p class="font-medium" v-if="card.evolvesFrom">
-            Evolves From:
-            <span class="font-normal">{{ card.evolvesFrom }}</span>
-          </p>
+        <div v-if="card.evolvesFrom" class="mb-4 flex flex-col">
+          <h6 class="text-xs m-0 font-bold text-gray-500">Evolves From:</h6>
+          <p class="text-gray-400">{{ card.evolvesFrom }}</p>
         </div>
 
-        <div class="mb-4">
-          <p class="font-medium">
-            Artist: <span class="font-normal">{{ card.artist }}</span>
-          </p>
-          <p class="font-medium">
-            Set: <span class="font-normal">{{ card.set.name }}</span>
-          </p>
-          <!-- <img
-            :src="card.set.images.symbol"
-            :alt="`${card.set.name} symbol`"
-            class="h-12 w-12 object-cover"
-          /> -->
-          <img
-            :src="card.set.images.logo"
-            :alt="`${card.set.name} logo`"
-            class="h-10 w-auto object-cover"
-          />
-          <p class="font-medium">
-            Release Date:
-            <span class="font-normal">{{ card.set.releaseDate }}</span>
-          </p>
+        <!-- Set information -->
+        <div class="my-4">
+          <h4 class="text-lg font-semibold text-gray-200">Set information</h4>
+          <div class="flex justify-between items-center">
+            <div class="text-gray-400">
+              <h6 class="text-xs m-0 font-bold text-gray-500">Name:</h6>
+              <p>{{ card.set.name }}</p>
+              <h6 class="text-xs m-0 font-bold text-gray-500">Series:</h6>
+              <p>{{ card.set.series }}</p>
+            </div>
+            <img
+              :src="card.set.images.logo"
+              :alt="`${card.set.name} logo`"
+              class="h-12 w-auto object-contain"
+            />
+          </div>
+        </div>
+
+        <!-- Card market prices -->
+        <div class="my-4">
+          <div class="flex justify-between items-center">
+            <h4 class="text-lg font-semibold mb-2 text-gray-200">
+              Card Market Prices
+            </h4>
+            <a :href="card.cardmarket.url" target="_blank"
+              >Check Latest Prices</a
+            >
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-medium text-gray-400">Average Sell Price:</p>
+              <p class="font-bold text-gray-200">
+                {{ card.cardmarket.prices.averageSellPrice }}€
+              </p>
+            </div>
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-medium text-gray-400">Low Price:</p>
+              <p class="font-bold text-gray-200">
+                {{ card.cardmarket.prices.lowPrice }}€
+              </p>
+            </div>
+            <!-- ... other price data ... -->
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-medium text-gray-400">Reverse Holo Trend:</p>
+              <p class="font-bold text-gray-200">
+                {{ card.cardmarket.prices.reverseHoloTrend }}€
+              </p>
+            </div>
+            <div class="bg-gray-700 p-3 rounded">
+              <p class="font-medium text-gray-400">Trend Price:</p>
+              <p class="font-bold text-gray-200">
+                {{ card.cardmarket.prices.trendPrice }}€
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -100,7 +139,7 @@
 <script>
 import userUserCards from '@/services/useUserCards'
 import { useStore } from 'vuex'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 export default {
   props: {
@@ -118,6 +157,14 @@ export default {
       removeFromWishlist,
     } = userUserCards()
 
+    const imageLoaded = ref(false)
+
+    const handleImageLoad = () => {
+      setTimeout(() => {
+        imageLoaded.value = true
+      }, 300)
+    }
+
     const isInCollection = computed(() =>
       store.state.cards.collection.some((item) => item === props.card.id),
     )
@@ -126,6 +173,8 @@ export default {
     )
 
     return {
+      imageLoaded,
+      handleImageLoad,
       addToCollection,
       removeFromCollection,
       addToWishlist,

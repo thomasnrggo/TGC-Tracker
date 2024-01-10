@@ -8,9 +8,9 @@
     >
       <button
         @click="closeModal"
-        class="absolute top-0 right-0 mx-4 my-2 text-gray-100 hover:text-gray-300"
+        class="absolute top-0 right-0 mx-4 my-2 text-gray-100 hover:text-pink-500"
       >
-        <span class="text-xl">&times;</span>
+        <span class="text-2xl">&times;</span>
       </button>
       <slot></slot>
     </div>
