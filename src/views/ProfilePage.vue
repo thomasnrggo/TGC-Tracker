@@ -27,23 +27,20 @@
 
       <LoaderComponent v-if="loading" />
 
-      <div
+      <EmptyState
         v-if="!loading && data.length === 0"
-        class="text-center flex flex-col justify-center items-center min-h-[60vh]"
+        image="https://img.pokemondb.net/sprites/scarlet-violet/normal/snorlax.png"
+        altText="Snorlax"
+        title="Your collection is empty"
+        message="There's no cards in your collection, Try adding some"
       >
-        <h3 class="text-3xl text-gray-800 font-semibold mb-4">
-          Your collection is empty
-        </h3>
-        <p class="text-lg text-gray-500 mb-6">
-          Start building your collection by finding and adding cards.
-        </p>
         <router-link
           to="/"
           class="text-gray-500 hover:text-primary-100 font-bold rounded border border-gray-500 hover:border-primary-100 p-2 transition duration-200 inline-block"
         >
           Browse Cards
         </router-link>
-      </div>
+      </EmptyState>
 
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
         <!-- TODO: make reusable card -->
@@ -71,6 +68,7 @@ import { useStore } from 'vuex'
 import Layout from '@/components/LayoutView.vue'
 import userUserCards from '@/services/useUserCards'
 import LoaderComponent from '@/components/LoaderComponent.vue'
+import EmptyState from '@/components/EmptyState.vue'
 
 export default {
   setup() {
@@ -101,6 +99,7 @@ export default {
   components: {
     Layout,
     LoaderComponent,
+    EmptyState,
   },
 }
 </script>
