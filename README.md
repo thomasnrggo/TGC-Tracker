@@ -1,4 +1,4 @@
-![Pokemon TCG Tracker App](./src/assets/logo.png)
+<img width="180" alt="Logo" src="./src/assets/logo.png">
 
 # Pokemon TCG Tracker
 
