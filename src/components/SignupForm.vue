@@ -32,6 +32,7 @@
               >
               <input
                 type="text"
+                name="username"
                 v-model="username"
                 placeholder="Type Username"
                 class="border border-gray-700 p-2 rounded w-full bg-gray-500 placeholder:text-gray-700"
@@ -44,6 +45,7 @@
               >
               <input
                 type="email"
+                name="email"
                 v-model="email"
                 placeholder="Type an email address"
                 class="border border-gray-700 p-2 rounded w-full bg-gray-500 placeholder:text-gray-600"
@@ -58,6 +60,7 @@
               >
               <input
                 type="password"
+                name="password"
                 v-model="password"
                 placeholder="Type a password"
                 class="border border-gray-700 p-2 rounded w-full bg-gray-500 placeholder:text-gray-600"

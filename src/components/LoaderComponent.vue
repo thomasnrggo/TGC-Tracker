@@ -1,5 +1,5 @@
 <template>
-  <div class="preloader" :style="cssVars">
+  <div id="loader" class="preloader" :style="cssVars">
     <span class="rot-1"></span>
     <span class="rot-2"></span>
     <span class="rot-3"></span>
