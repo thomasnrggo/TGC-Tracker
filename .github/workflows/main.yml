@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Cypress e2e
 
 on: push
 
@@ -11,6 +11,25 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm run serve
+          browser: chrome
+
+name: Cypress component tests
+
+on: push
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run --component
         uses: cypress-io/github-action@v6
         with:
           build: npm run build
