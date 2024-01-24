@@ -100,8 +100,6 @@ describe('Authentication Flow', () => {
 
   describe('Logout', () => {
     it('should allows a user to logout', () => {
-      cy.visit('/login')
-
       cy.login(
         Cypress.env('TEST_USER_EMAIL'),
         Cypress.env('TEST_USER_PASSWORD'),
