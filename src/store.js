@@ -25,7 +25,7 @@ export default createStore({
   actions: {
     register({ commit }, authData) {
       return axios
-        .post('https://tgc-tracker-api.onrender.com/api/v1/auth/signup', {
+        .post('https://tgc-tracker-api.vercel.app/api/v1/auth/signup', {
           username: authData.username,
           email: authData.email,
           password: authData.password,
@@ -40,7 +40,7 @@ export default createStore({
     },
     login({ commit }, authData) {
       return axios
-        .post('https://tgc-tracker-api.onrender.com/api/v1/auth/login', {
+        .post('https://tgc-tracker-api.vercel.app/api/v1/auth/login', {
           email: authData.email,
           password: authData.password,
         })
@@ -75,7 +75,7 @@ export default createStore({
       const id = this.state.user._id
 
       axios
-        .get(`https://tgc-tracker-api.onrender.com/api/v1/cards/${id}/list`, {
+        .get(`https://tgc-tracker-api.vercel.app/api/v1/cards/${id}/list`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

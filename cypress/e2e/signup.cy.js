@@ -27,7 +27,7 @@ describe('User Registration', () => {
       cy.get('@token').then((token) => {
         cy.request({
           method: 'DELETE',
-          url: `https://tgc-tracker-api.onrender.com/api/v1/users/${userId}`,
+          url: `https://tgc-tracker-api.vercel.app/api/v1/users/${userId}`,
           headers: {
             Authorization: `Bearer ${token}`,
           },

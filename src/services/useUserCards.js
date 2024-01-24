@@ -16,7 +16,7 @@ const useUserCards = () => {
       const id = store.state.user._id
 
       const response = await axios.get(
-        `https://tgc-tracker-api.onrender.com/api/v1/cards/${id}`,
+        `https://tgc-tracker-api.vercel.app/api/v1/cards/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ const useUserCards = () => {
       const id = store.state.user._id
 
       await axios
-        .post(`https://tgc-tracker-api.onrender.com/api/v1/cards/${id}`, card, {
+        .post(`https://tgc-tracker-api.vercel.app/api/v1/cards/${id}`, card, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -64,7 +64,7 @@ const useUserCards = () => {
 
       await axios
         .post(
-          `https://tgc-tracker-api.onrender.com/api/v1/cards/${id}/wishlist`,
+          `https://tgc-tracker-api.vercel.app/api/v1/cards/${id}/wishlist`,
           card,
           {
             headers: {
@@ -90,7 +90,7 @@ const useUserCards = () => {
 
       await axios
         .delete(
-          `https://tgc-tracker-api.onrender.com/api/v1/cards/${id}/${card.id}`,
+          `https://tgc-tracker-api.vercel.app/api/v1/cards/${id}/${card.id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -115,7 +115,7 @@ const useUserCards = () => {
 
       await axios
         .delete(
-          `https://tgc-tracker-api.onrender.com/api/v1/cards/${id}/wishlist/${card._id}`,
+          `https://tgc-tracker-api.vercel.app/api/v1/cards/${id}/wishlist/${card._id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
